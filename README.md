@@ -16,7 +16,7 @@ The wsrf has an excellent R implementation (Zhao, Williams & Huang, 2017). But d
 ## Where to get it
 ```sh
 # PyPI
-pip install pandas
+pip install wsrf
 ```
 
 
