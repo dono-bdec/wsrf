@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: wsrf
-Version: 0.1.1
+Version: 0.1.2
 Summary: Weighted Subspace Random Forest Classifier
 Author-email: Dipyaman Sanyal <deep@dono.consulting>, Satyavrat Bondre <satyavrat.bondre@gmail.com>
 License: MIT License
@@ -59,7 +59,7 @@ The wsrf has an excellent R implementation (Zhao, Williams & Huang, 2017). But d
 ## Where to get it
 ```sh
 # PyPI
-pip install pandas
+pip install wsrf
 ```
 
 

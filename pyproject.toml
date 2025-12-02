@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "wsrf"
-version = "0.1.1"
+version = "0.1.2"
 description = "Weighted Subspace Random Forest Classifier"
 readme = "README.md"
 requires-python = ">=3.8"
