@@ -1,0 +1,4 @@
+*/meta_project_*
+.pytest*
+*__pycache__*
+htmlcov/

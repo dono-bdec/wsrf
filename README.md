@@ -1,0 +1,162 @@
+# wsrf
+
+![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
+![Tests](https://img.shields.io/badge/tests-37%20passed-brightgreen)
+![Coverage](https://img.shields.io/badge/coverage-87%25-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-blue)
+
+A Python implementation of the **Weighted Subspace Random Forest (WSRF)** model for high-dimensional classification.
+
+## Overview
+
+The Random Forest (Breiman 2001) is one of the most popular and successful ensemble models. However, higher dimensional data can benefit from better subsampling methods for creation of the forests from the underlying decision trees. The weighted subspace random forest (wsrf) model (Xu, Huang, Williams, Wang & Ye, 2012) is one effective way of doing this. 
+
+The wsrf has an excellent R implementation (Zhao, Williams & Huang, 2017). But despite its success in classifying high-dimensional data, wsrf did not have a Python implementation. **This library provides a Python implementation of wsrf.**
+
+## Where to get it
+```sh
+# PyPI
+pip install wsrf
+```
+
+
+## Features
+
+- **Weighted Subspace Sampling**: Uses feature importance to guide subspace selection
+- **Out-of-Bag (OOB) Error Estimation**: Per-tree and ensemble-level OOB error tracking
+- **Feature Importance**: Calculates and tracks feature importance scores
+- **Tree Correlation Analysis**: Measures diversity in ensemble predictions
+- **Ensemble Strength**: Breiman-style strength calculations
+- **Modern `src/` Layout**: Clean, pip-installable package structure
+- **Comprehensive Tests**: 37 tests with 87% code coverage
+
+
+## Usage
+
+### Basic Classification
+
+```python
+from wsrf import WSRFClassifier
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+
+# Create dataset
+X, y = make_classification(n_samples=1000, n_features=20, n_classes=2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train WSRF classifier
+model = WSRFClassifier(n_estimators=100, random_state=42)
+model.fit(X_train, y_train)
+
+# Make predictions
+predictions = model.predict(X_test)
+probabilities = model.predict_proba(X_test)
+
+print(f"Accuracy: {(predictions == y_test).mean():.3f}")
+```
+
+### Feature Importance
+
+```python
+from wsrf import WSRFClassifier, importance
+
+model = WSRFClassifier(n_estimators=100)
+model.fit(X_train, y_train)
+
+# Get feature importances
+importances = importance(model)
+print("Feature importances:", importances)
+```
+
+### OOB Error Rate
+
+```python
+from wsrf import WSRFClassifier, oob_error_rate
+
+model = WSRFClassifier(n_estimators=100)
+model.fit(X_train, y_train)
+
+# Calculate out-of-bag error
+oob_err = oob_error_rate(model, X_train, y_train)
+print(f"OOB Error Rate: {oob_err:.3f}")
+```
+
+### Weighted vs Unweighted Subspace Sampling
+
+```python
+# Weighted sampling (default - uses feature importance)
+model_weighted = WSRFClassifier(n_estimators=100, use_weights=True)
+
+# Unweighted sampling (standard random subspace method)
+model_unweighted = WSRFClassifier(n_estimators=100, use_weights=False)
+```
+
+### Advanced Options
+
+```python
+model = WSRFClassifier(
+    n_estimators=500,      # Number of trees in the forest
+    nodesize=1,            # Minimum samples per leaf (min_samples_leaf)
+    use_weights=True,      # Use feature importance for subspace sampling
+    random_state=42        # Random seed for reproducibility
+)
+```
+
+## API Reference
+
+### Main Classes
+
+- **`WSRFClassifier`**: Weighted Subspace Random Forest classifier
+  - `fit(X, y)`: Train the model
+  - `predict(X)`: Make class predictions
+  - `predict_proba(X)`: Get class probabilities
+
+### Utility Functions
+
+- **`importance(model)`**: Get feature importance scores
+- **`oob_error_rate(model, X, y)`**: Calculate OOB error rate
+- **`tree_correlation(model, X)`**: Compute tree correlation matrix
+- **`strength(model, X, y)`**: Calculate Breiman-style ensemble strength
+- **`combine_forests(*forests)`**: Combine multiple trained forests
+- **`subset_forest(model, indices)`**: Create a subset of trees from a forest
+
+
+### Running Coverage Analysis
+
+```bash
+# Terminal report with missing lines
+pytest tests/ --cov=wsrf --cov-report=term-missing
+
+# HTML report for detailed analysis
+pytest tests/ --cov=wsrf --cov-report=html
+open htmlcov/index.html
+```
+
+## References
+
+1. **Breiman, L.** (2001). "Random Forests." *Machine Learning*, 45(1), 5-32.
+
+2. **Xu, B., Huang, J. Z., Williams, G., Wang, Q., & Ye, Y.** (2012). "Classifying Very High-Dimensional Data with Random Forests Built from Small Subspaces." *International Journal of Data Warehousing and Mining*, 8(2), 44-63.
+
+3. **Zhao, H., Williams, G. J., & Huang, J. Z.** (2017). "wsrf: An R Package for Classification with Scalable Weighted Subspace Random Forests." *Journal of Statistical Software*, 77(3), 1-30.
+
+## License
+MIT License  - refer to the LICENSE file in this repo for more details
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate and maintain the existing code style.
+
+## Citation
+
+If you use this package in your research, please cite:
+
+```bibtex
+@software{wsrf_python,
+  title = {wsrf: Weighted Subspace Random Forest for Python},
+  author = {Dipyaman Sanyal and Satyavrat Bondre},
+  year = {2025},
+  url = {https://github.com/dono-bdec/wsrf}
+}
