@@ -1,0 +1,20 @@
+Loading required package: parallel
+Loading required package: Rcpp
+wsrf: An R Package for Scalable Weighted Subspace Random Forests.
+Version 1.7.30
+Use C++ standard thread library for parallel computing
+[1] "Training the model..."
+A Weighted Subspace Random Forest model with 500 trees.
+
+  No. of variables tried at each split: 3
+        Minimum size of terminal nodes: 2
+                 Out-of-Bag Error Rate: 0.08
+                              Strength: 0.84
+                           Correlation: 0.10
+
+Confusion matrix:
+           setosa versicolor virginica class.error
+setosa         37          1         0        0.03
+versicolor      0         33         2        0.06
+virginica       0          5        27        0.16
+[1] "Model Accuracy on Test Set: 95.56 %"

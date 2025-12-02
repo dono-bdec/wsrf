@@ -1,0 +1,40 @@
+======================================================================
+WSRF Python Implementation - Iris Classification Example
+======================================================================
+
+Loading iris dataset...
+Dataset loaded: 150 samples, 4 features
+Classes: [np.str_('setosa'), np.str_('versicolor'), np.str_('virginica')]
+
+Setting random seed to 42 for reproducibility
+Training set: 105 samples
+Test set: 45 samples
+
+Training the model...
+
+======================================================================
+MODEL SUMMARY
+======================================================================
+A Weighted Subspace Random Forest model with 500 trees.
+
+  No. of variables tried at each split: 3
+        Minimum size of terminal nodes: 1
+                 Out-of-Bag Error Rate: 0.05
+                              Strength: 0.96
+                           Correlation: 0.98
+
+Confusion matrix (training set approximation):
+                setosa versicolor  virginica class.error
+setosa             35          0          0        0.00
+versicolor          0         35          0        0.00
+virginica           0          0         35        0.00
+
+======================================================================
+TEST SET EVALUATION
+======================================================================
+Model Accuracy on Test Set: 95.56 %
+
+======================================================================
+Example completed successfully!
+Results saved to: /Users/satyavratbondre/dev/dono/wsrf/examples/iris/iris_results.txt
+======================================================================

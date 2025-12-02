@@ -1,0 +1,34 @@
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wsrf"
+version = "0.1.1"
+description = "Weighted Subspace Random Forest Classifier"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file = "LICENSE" }
+authors = [{ name="Dipyaman Sanyal", email="deep@dono.consulting" },{ name="Satyavrat Bondre", email="satyavrat.bondre@gmail.com" }]
+keywords = ["machine learning", "random forest", "subspace", "ensemble"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+dependencies = ["numpy>=1.18.0","scikit-learn>=0.24.0"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/dono-bdec/wsrf"
+Repository = "https://github.com/dono-bdec/wsrf"
+Issues = "https://github.com/dono-bdec/wsrf/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
